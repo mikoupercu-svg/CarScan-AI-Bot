@@ -1,7 +1,7 @@
 import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
-TOKEN = "ضع_التوكن_تاعك_هنا"
+TOKEN = "8364612582:AAHekCdqB8afotCloEqtIu9eV_ER5-bmqmA"
 bot = telebot.TeleBot(TOKEN)
 
 def main_menu():
