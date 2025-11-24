@@ -49,4 +49,21 @@ def handle_voice(message):
 def handle_photo(message):
     bot.reply_to(message, "🔎 جارٍ تحليل لوحة العدادات...\n(سيتم إضافة AI بعد الرفع)")
 
-bot.infinity_polling()
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route("/" + TOKEN, methods=["POST"])
+def getMessage():
+    json_string = request.get_data().decode("utf-8")
+    update = telebot.types.Update.de_json(json_string)
+    bot.process_new_updates([update])
+    return "!", 200
+
+@app.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url="https://your-render-url.onrender.com/" + TOKEN)
+    return "OK", 200
+
+app.run(host="0.0.0.0", port=10000)
